@@ -1,5 +1,5 @@
 ###### Application yaml definition
----
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -23,10 +23,10 @@ status: {}
 
 ###### Channel yaml definition
 ---
-  apiVersion: v1
-  kind: Namespace
-  metadata:
-    name: ns-ch
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-ch
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
