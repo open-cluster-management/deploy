@@ -22,7 +22,7 @@ With the _open-cluster-management_ project, you can complete the following funct
 
 ## Let's get started...
 
-You can find our __work-in-progress__ documentation [here](https://github.com/open-cluster-management/rhacm-docs/blob/doc_prod/README.md). Please read through the docs to find out how you can use the _open-cluster-management_ project. Oh, and please submit an issue for any problems you may find, or clarifications you might suggest.
+You can find our _work-in-progress_ documentation [here](https://github.com/open-cluster-management/rhacm-docs/blob/2.0_stage/README.md). Please read through the docs to find out how you can use the _open-cluster-management_ project. Submit an issue for any problems you may find, or clarifications you might suggest by [opening an issue](https://github.com/open-cluster-management/rhacm-docs/issues/new).
 
 You can find information on how to contribute to this project and our docs project in our [CONTRIBUTING.md](CONTRIBUTING.md) doc.
 
