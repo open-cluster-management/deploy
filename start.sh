@@ -261,6 +261,7 @@ printf "\n##### Applying $OPERATOR_DIRECTORY subscription #####\n"
 if [[ "${TARGET_NAMESPACE}" != "open-cluster-management" ]]; then
     TMP_OP_DIR="operator_tmp"
     printf "* Creating temporary directory ${TMP_OP_DIR}/ to customize namespace\n"
+    if [[ -d ${TMP_OP_DIR}/ ]]; then rm -rf ${TMP_OP_DIR}/; fi;
     mkdir ${TMP_OP_DIR}/
     cp ${OPERATOR_DIRECTORY}/*.yaml ${TMP_OP_DIR}/
     ${SED} -i "s/\.open-cluster-management\./.${TARGET_NAMESPACE}./" ${TMP_OP_DIR}/catalog-source.yaml

@@ -25,6 +25,17 @@ do
     esac
 done
 
+# fix sed issue on mac
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+SED="sed"
+if [ "${OS}" == "darwin" ]; then
+    SED="gsed"
+    if [ ! -x "$(command -v ${SED})"  ]; then
+       echo "ERROR: $SED required, but not found."
+       echo "Perform \"brew install gnu-sed\" and try again."
+       exit 1
+    fi
+fi
 
 # Make sure `oc login` has been done and `oc` command is working
 echo "Testing connection"
@@ -49,7 +60,12 @@ printf "\n"
 
 ./clean-clusters.sh "$args"
 
-kubectl delete -k multiclusterhub/ -n ${TARGET_NAMESPACE}
+TMP_MCH_DIR="mch-uninstall-tmp"
+if [[ -d ${TMP_MCH_DIR} ]]; then rm -rf ${TMP_MCH_DIR}; fi;
+cp -r multiclusterhub ${TMP_MCH_DIR}
+${SED} -i "s|__ANNOTATION__|{}|g" ./${TMP_MCH_DIR}/example-multiclusterhub-cr.yaml
+kubectl delete -k ${TMP_MCH_DIR}/ -n ${TARGET_NAMESPACE}
+rm -rf ${TMP_MCH_DIR}
 echo "Sleeping for 200 seconds to allow resources to finalize ..."
 sleep 200
 
