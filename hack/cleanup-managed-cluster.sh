@@ -31,6 +31,7 @@ component_crds=(
 	searchcollectors.agent.open-cluster-management.io
 	workmanagers.agent.open-cluster-management.io
 	appliedmanifestworks.work.open-cluster-management.io
+	klusterlets.operator.open-cluster-management.io
 )
 
 for crd in "${component_crds[@]}"; do
