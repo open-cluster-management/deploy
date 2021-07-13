@@ -1,16 +1,19 @@
 ---
-apiVersion: policy.mcm.ibm.com/v1alpha1
+apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: guestbook-policy-scc
-  namespace: open-cluster-management
+  namespace: demo-guestbook
+  annotations:
+    policy.open-cluster-management.io/categories: PR.PT Protective Technology
+    policy.open-cluster-management.io/controls: PR.PT-3 Least Functionality
+    policy.open-cluster-management.io/standards: NIST-CSF
 spec:
-  complianceType: musthave
   remediationAction: enforce
   disabled: false
   namespaces:
     exclude: ["kube-*"]
-    include: ["open-cluster-management"]
+    include: ["demo-guestbook"]
   object-templates:
     - complianceType: musthave
       objectDefinition:
@@ -47,7 +50,7 @@ spec:
         supplementalGroups:
           type: RunAsAny
         users:
-          - 'system:serviceaccount:open-cluster-management:runasanyuid'
+          - 'system:serviceaccount:demo-guestbook:runasanyuid'
         volumes:
         - configMap
         - downwardAPI
@@ -56,11 +59,11 @@ spec:
         - projected
         - secret
 ---
-apiVersion: mcm.ibm.com/v1alpha1
+apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-guestbook-policy-scc
-  namespace: open-cluster-management
+  namespace: demo-guestbook
 placementRef:
   name: dev-clusters
   kind: PlacementRule
@@ -68,4 +71,4 @@ placementRef:
 subjects:
 - name: guestbook-policy-scc
   kind: Policy
-  apiGroup: policy.mcm.ibm.com
+  apiGroup: policy.open-cluster-management.io

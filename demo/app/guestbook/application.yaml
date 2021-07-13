@@ -3,7 +3,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
   name: guestbook-app-latest
-  namespace: open-cluster-management
+  namespace: demo-guestbook
 spec:
   type: GitHub
   pathname: https://github.com/open-cluster-management/deploy.git
@@ -12,7 +12,7 @@ apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
   name: guestbook-app
-  namespace: open-cluster-management
+  namespace: demo-guestbook
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
@@ -29,13 +29,13 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
 metadata:
   name: guestbook-app
-  namespace: open-cluster-management
+  namespace: demo-guestbook
   labels:
     app: guestbook-app
   annotations:
       apps.open-cluster-management.io/github-path: resources/guestbook
 spec:
-  channel: open-cluster-management/guestbook-app-latest
+  channel: demo-guestbook/guestbook-app-latest
   placement:
     placementRef:
       kind: PlacementRule

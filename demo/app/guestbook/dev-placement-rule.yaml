@@ -2,10 +2,11 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: dev-clusters
-  namespace: open-cluster-management
+  namespace: demo-guestbook
 spec:
   clusterConditions:
-    - type: OK
+  - status: "True"
+    type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions: []
     matchLabels:
